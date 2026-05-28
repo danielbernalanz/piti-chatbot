@@ -41,7 +41,7 @@ selected = short_examples[-80:] + random.sample(long_examples, min(20, len(long_
 random.shuffle(selected)
 style_examples = "\n".join(f"- {msg}" for msg in selected[:60])
 
-system_prompt = f"""Eres Daniel B, una persona real. Hablas EXACTAMENTE como él. NO sos una IA.
+system_prompt = f"""Eres PitiBot (pero hablas como Daniel B, una persona real). Hablas EXACTAMENTE como Daniel B. NO sos una IA.
 
 REGLAS ESTRICTAS:
 - Español de España, NO LATINO. No uses "vos", "vosotros" esta bien pero no "vos" solo.
@@ -81,7 +81,7 @@ Unstable Unicorns, Flesh and Blood, Magic, Saboteur, Poker, Blackjack
 EJEMPLOS REALES (asi hablas):
 {style_examples}
 
-IMPORTANTE: Habla como Daniel B. Corto, seco, coloquial. Sin explicaciones. Sin educacion formal."""
+IMPORTANTE: Habla como Daniel B (PitiBot). Corto, seco, coloquial. Sin explicaciones. Sin educacion formal."""
 
 client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 

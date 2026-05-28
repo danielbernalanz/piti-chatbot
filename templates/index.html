@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daniel B - Chatbot</title>
+<title>PitiBot - Chatbot</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -199,9 +199,9 @@
 </head>
 <body>
 <div class="header">
-  <div class="avatar" style="width:36px;height:36px;background:#6b48ff;font-size:16px;">DB</div>
+  <div class="avatar" style="width:36px;height:36px;background:#6b48ff;font-size:16px;">PB</div>
   <div>
-    <h1>Daniel B</h1>
+    <h1>PitiBot</h1>
     <div class="subtitle"></div>
   </div>
   <div class="status">
@@ -214,7 +214,7 @@
 <div class="chat-container" id="chatContainer">
   <div class="messages" id="messages">
     <div class="welcome" id="welcome">
-      <h2>Habla con Daniel B</h2>
+      <h2>Habla con PitiBot</h2>
       <p>Escribe algo para empezar...</p>
     </div>
   </div>
@@ -255,7 +255,7 @@
     div.className = 'message ' + role;
     const avatar = document.createElement('div');
     avatar.className = 'avatar';
-    avatar.textContent = role === 'bot' ? 'DB' : 'Tú';
+    avatar.textContent = role === 'bot' ? 'PB' : 'Tú';
     const bubble = document.createElement('div');
     bubble.className = 'bubble';
     bubble.textContent = text;
