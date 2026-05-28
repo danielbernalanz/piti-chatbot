@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CHAT_FILES = sorted([
     os.path.join(BASE_DIR, f)
     for f in os.listdir(BASE_DIR)
-    if f.startswith("Chat de WhatsApp con") and f.endswith(".txt")
+    if f.endswith(".txt") and f not in ("requirements.txt",)
 ])
 
 def extract_daniel_msgs(filepath):
