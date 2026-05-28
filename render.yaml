@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: piti-chatbot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: OPENCODE_ZEN_KEY
+        sync: false
