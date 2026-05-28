@@ -3,6 +3,7 @@ import os
 import random
 from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
+from cryptography.fernet import Fernet
 
 app = Flask(__name__)
 
@@ -11,6 +12,27 @@ BASE_URL = "https://opencode.ai/zen/v1"
 MODEL = "mimo-v2.5-free"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+_CHAT_KEY = os.environ.get("CHAT_ENCRYPT_KEY")
+if not _CHAT_KEY:
+    key_file = os.path.join(BASE_DIR, ".chat_key")
+    if os.path.exists(key_file):
+        with open(key_file) as f:
+            _CHAT_KEY = f.read().strip()
+if _CHAT_KEY:
+    _fernet = Fernet(_CHAT_KEY.encode() if isinstance(_CHAT_KEY, str) else _CHAT_KEY)
+else:
+    _fernet = None
+
+def _decrypt_file(filepath):
+    with open(filepath, "rb") as f:
+        encrypted = f.read()
+    try:
+        decrypted = _fernet.decrypt(encrypted).decode("utf-8")
+    except Exception:
+        with open(filepath, "r", encoding="utf-8") as f:
+            decrypted = f.read()
+    return decrypted.splitlines()
+
 CHAT_FILES = sorted([
     os.path.join(BASE_DIR, f)
     for f in os.listdir(BASE_DIR)
@@ -18,8 +40,10 @@ CHAT_FILES = sorted([
 ])
 
 def extract_daniel_msgs(filepath):
-    with open(filepath, "r", encoding="utf-8") as f:
-        lines = f.readlines()
+    try:
+        lines = _decrypt_file(filepath)
+    except FileNotFoundError:
+        return []
     msgs = []
     for line in lines:
         m = re.match(r'^\d{1,2}/\d{1,2}/\d{2,4},\s*\d{1,2}:\d{2}\s*-\s*Daniel B:\s*(.*)', line)

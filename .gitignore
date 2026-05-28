@@ -2,3 +2,9 @@ __pycache__/
 *.pyc
 .env
 *.zip
+.chat_key
+encrypt_files.py
+a1b2c3d4.txt
+e5f6g7h8.txt
+i9j0k1l2.txt
+m3n4o5p6.txt
